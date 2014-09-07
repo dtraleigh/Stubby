@@ -4,6 +4,8 @@
 import os
 
 def new_stub_or_quit():
+    clear = lambda: os.system('cls')
+    clear()
     answer = raw_input('Create new media stub? (Y or N): ')
     
     if answer == 'Y' or answer == 'y':
@@ -33,7 +35,7 @@ def enter_movie_type():
     return movie_type
 
 def create_stub_content(title, movie_type):
-    # <discstub><title>Title</title></discstub>
+    # <discstub><title>Title (year)</title></discstub>
     stub = '<discstub><title>' + title + ' (' + movie_type + ')</title></discstub>'
     
     return stub
