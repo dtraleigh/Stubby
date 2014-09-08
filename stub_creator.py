@@ -74,7 +74,14 @@ def ask_and_create():
     stub_content = create_stub_content(title, movie_type)
     
     filename = title + ' (' + year + ').' + movie_type + '.disc'
+    
+    #////
+    #Change your desired path here
+    #\\\\    
     sub_dir = 'output/'
+    
+    if not os.path.exists(sub_dir):
+        os.makedirs(sub_dir)
     
     the_file = open(os.path.join(sub_dir, filename), 'w')
     the_file.write(stub_content)

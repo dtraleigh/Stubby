@@ -16,18 +16,18 @@ described on this wiki page:
 
 Media stubs - [http://wiki.xbmc.org/index.php?title=media_stubs](http://wiki.xbmc.org/index.php?title=media_stubs) (via Kodi Wiki)
 
-I had a lot of movies that to go through and instead of doing it manually, I turned this into a learning experience with Python
+I had a lot of movies to go through and instead of doing it manually, I turned this into a learning experience with Python
 and created a tool to help me out.
 
 ## Configuration
 
-The only bit of configuration is if you want the created text files in a different folder outside of the included 'output' folder. In the
+The only bit of configuration is if you want the created text files in a different folder outside of the 'output' folder. In the
 'stub_creator.py' file, change the directory as shown below.
 
 ```
 #////
-    #Change your desired path here
-    #\\\\    
-    sub_dir = 'output/'
+#Change your desired path here
+#\\\\    
+sub_dir = 'output/'
 ```
 
