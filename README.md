@@ -4,13 +4,13 @@ Description: This project is a simple text file creator, used to make Media Stub
 
 ## Project Setup
 
-All you need is Python installed to run the script and following the input questions is fairly straight forward. 
+All you need is Python installed to run the script and following the input questions is fairly straight forward.
 
-It is built using Python 2 and may or may not work with Python 3.
+It was last tested with Python 2.7.13 and 3.5.0.
 
 ## Background
 
-I'm a big user of the media center software Kodi and wanted to create empty text files to populate 
+I'm a big user of the media center software Kodi and wanted to create empty text files to populate
 the library with movies I had on the shelf. Creating Media Stubs for this kind of offline media is
 described on this wiki page:
 
@@ -30,4 +30,3 @@ The only bit of configuration is if you want the created text files in a differe
 #\\\\    
 sub_dir = 'output/'
 ```
-

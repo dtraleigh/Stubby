@@ -93,6 +93,11 @@ def ask_and_create():
 clear = lambda: os.system('cls')
 clear()
 
+try:
+    input = raw_input
+except NameError:
+    pass
+
 user_input = new_stub_or_quit()
 
 while user_input:
