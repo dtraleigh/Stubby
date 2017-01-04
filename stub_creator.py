@@ -9,8 +9,7 @@ class new_media_stub():
         # ////
         # Change your desired path here
         # \\\\
-        self.def_sub_dir = "../Movies/"
-        self.user_sub_dir = ""
+        self.sub_dir = "../Movies/"
         self.title = ""
         self.year = ""
         self.type = ""
@@ -21,12 +20,18 @@ class new_media_stub():
         menu += "   Menu\n"
         menu += "      (s) - Set media stub output path.\n"
         menu += "      (c) - Create new media stub.\n"
-        menu += "      (q) - Quit.\n"
+        menu += "      (q) - Quit.\n\n"
+        menu += "   Output Folder: " + self.sub_dir + "\n"
 
         return menu
 
+    def clear_screen(self):
+        clear = lambda: os.system("cls")
+        clear()
+
     def change_output_folder(self):
-        self.user_sub_dir = input("Enter output dir: ")
+        self.sub_dir = input("Enter output dir (. for current, .. for up one level, etc.): ")
+        self.clear_screen()
 
     def new_stub_or_quit(self):
         print(self.instructions())
@@ -104,18 +109,16 @@ class new_media_stub():
 
         filename = self.title + " (" + self.year + ")." + self.type + ".disc"
 
-        if not os.path.exists(self.def_sub_dir):
-            os.makedirs(self.def_sub_dir)
+        if not os.path.exists(self.sub_dir):
+            os.makedirs(self.sub_dir)
 
-        the_file = open(os.path.join(self.def_sub_dir, filename), "w")
+        the_file = open(os.path.join(self.sub_dir, filename), "w")
         the_file.write(stub_content)
         the_file.close()
 
         print('\nCreated file: "' + filename + '\"')
         print(stub_content)
 
-clear = lambda: os.system("cls")
-clear()
 
 try:
     input = raw_input
@@ -131,4 +134,4 @@ while user_input != False:
     elif user_input == "s":
         media_stub.change_output_folder()
     user_input = media_stub.new_stub_or_quit()
-    clear()
+    media_stub.clear_screen()
