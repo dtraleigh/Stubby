@@ -4,99 +4,114 @@
 import os
 
 class new_media_stub():
-    
+
+    def __init__(self):
+        # ////
+        # Change your desired path here
+        # \\\\
+        self.def_sub_dir = "../Movies/"
+        self.user_sub_dir = ""
+        self.title = ""
+        self.year = ""
+        self.type = ""
+        self.message = ""
+
     def instructions(self):
-        menu = "This is the menu"
+        menu = "Stub Creator 'Stubby' | Welcome!\n"
+        menu += "   Menu\n"
+        menu += "      (s) - Set media stub output path.\n"
+        menu += "      (c) - Create new media stub.\n"
+        menu += "      (q) - Quit.\n"
 
         return menu
 
+    def change_output_folder(self):
+        self.user_sub_dir = input("Enter output dir: ")
+
     def new_stub_or_quit(self):
-        print(instructions())
+        print(self.instructions())
+
+        valid_answers = ["S", "s", "C", "c", "Q", "q"]
 
         answer = ""
-        while (answer != "y" and answer != "Y" and answer != "n" and answer != "N"):
-            answer = input("Create new media stub? (Y or N): ")
+        while (answer not in valid_answers):
+            answer = input("Talk to me: ")
 
-        if answer == "Y" or answer == "y":
-            return True
-        elif answer == "N" or answer == "n":
+        if answer == "C" or answer == "c":
+            return "c"
+        elif answer == "S" or answer == "s":
+            return "s"
+        elif answer == "Q" or answer == "q":
             return False
 
-    def enter_year(self):
-        year = ""
-        while(len(year) != 4):
-            year = input("What year was it released? (4 digits): ")
+    def get_title(self):
+        self.title = input("What is the movie title?: ")
 
-        return year
+    def get_year(self):
+        while(len(self.year) != 4):
+            self.year = input("What year was it released? (4 digits): ")
 
-    def enter_movie_type(self):
+    def get_type(self):
+        valid_choices = ["1", "2", "3", "4", "5"]
+
         movie_type = ""
-        while(movie_type != "1" and movie_type != "2" and movie_type != "3" and movie_type != "4" and movie_type != "5"):
+        while(movie_type not in valid_choices):
             movie_type = input("DVD (1), BLURAY (2),  HDDVD (3), TV (4), or VHS (5)?: ")
 
         if movie_type == "1":
-            movie_type = "DVD"
+            self.type = "DVD"
         elif movie_type == "2":
-            movie_type = "BLURAY"
+            self.type = "BLURAY"
         elif movie_type == "3":
-            movie_type = "HDDVD"
+            self.type = "HDDVD"
         elif movie_type == "4":
-            movie_type = "TV"
+            self.type = "TV"
         elif movie_type == "5":
-            movie_type = "VHS"
+            self.type = "VHS"
 
-        return movie_type
+    def get_message(self):
+        valid_choices = ["Y", "y", "N", "n"]
 
-    def add_message(self):
         answer = ""
-        while (answer != "y" and answer != "Y" and answer != "n" and answer != "N"):
+        while (answer not in valid_choices):
             answer = input("Add a message to the media stub? (Y or N): ")
 
         if answer == "Y" or answer == "y":
-            message = input("Please type your message: ")
-            return message
-        elif answer == "N" or answer == "n":
-            return False
+            self.message = input("Please type your message: ")
 
-    def create_stub_content(self, title, movie_type):
+    def create_stub_content(self):
         #<discstub>
         #    <title>Title (year)</title>
         #    <message>Message to be displayed</message>
         #</discstub>
         indent = "    "
 
-        message = self.add_message()
-
         stub = "<discstub>\n"
-        stub = stub + indent + "<title>" + title + " (" + movie_type + ")</title>\n"
-        if message:
-            stub = stub + indent + "<message>" + message + "</message>\n"
+        stub = stub + indent + "<title>" + self.title + " (" + self.type + ")</title>\n"
+        if self.message != "":
+            stub = stub + indent + "<message>" + self.message + "</message>\n"
         stub = stub + "</discstub>\n"
 
         return stub
 
     def ask_and_create(self):
-        title = input("What is the movie title?: ")
-        year = self.enter_year()
-        movie_type = self.enter_movie_type()
+        self.get_title()
+        self.get_year()
+        self.get_type()
+        self.get_message()
 
-        stub_content = self.create_stub_content(title, movie_type)
+        stub_content = self.create_stub_content()
 
-        filename = title + " (" + year + ")." + movie_type + ".disc"
+        filename = self.title + " (" + self.year + ")." + self.type + ".disc"
 
-        #////
-        #Change your desired path here
-        #\\\\
-        sub_dir = "../Movies/"
+        if not os.path.exists(self.def_sub_dir):
+            os.makedirs(self.def_sub_dir)
 
-        if not os.path.exists(sub_dir):
-            os.makedirs(sub_dir)
-
-        the_file = open(os.path.join(sub_dir, filename), "w")
+        the_file = open(os.path.join(self.def_sub_dir, filename), "w")
         the_file.write(stub_content)
         the_file.close()
 
-        print("\nCreated file: "" + filename + "\")
+        print('\nCreated file: "' + filename + '\"')
         print(stub_content)
 
 clear = lambda: os.system("cls")
@@ -110,7 +125,10 @@ except NameError:
 media_stub = new_media_stub()
 user_input = media_stub.new_stub_or_quit()
 
-while user_input:
-    media_stub.ask_and_create()
+while user_input != False:
+    if user_input == "c":
+        media_stub.ask_and_create()
+    elif user_input == "s":
+        media_stub.change_output_folder()
     user_input = media_stub.new_stub_or_quit()
     clear()
