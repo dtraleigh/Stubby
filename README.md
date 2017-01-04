@@ -21,12 +21,4 @@ and created a tool to help me out.
 
 ## Configuration
 
-The only bit of configuration is if you want the created text files in a different folder outside of the 'output' folder. In the
-'stub_creator.py' file, change the directory as shown below.
-
-```
-#////
-#Change your desired path here
-#\\\\    
-sub_dir = 'output/'
-```
+Latest update allows the user to change the default output folder when running the script. Relative and absolute paths should work fine when entered.
