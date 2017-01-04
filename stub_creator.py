@@ -6,9 +6,6 @@ import os
 class new_media_stub():
 
     def __init__(self):
-        # ////
-        # Change your desired path here
-        # \\\\
         self.sub_dir = "../Movies/"
         self.title = ""
         self.year = ""
