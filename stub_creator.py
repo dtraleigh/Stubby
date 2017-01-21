@@ -23,8 +23,7 @@ class new_media_stub():
         return menu
 
     def clear_screen(self):
-        clear = lambda: os.system("cls")
-        clear()
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def change_output_folder(self):
         self.sub_dir = input("Enter output dir (. for current, .. for up one level, etc.): ")
@@ -127,6 +126,7 @@ user_input = media_stub.new_stub_or_quit()
 
 while user_input != False:
     if user_input == "c":
+        media_stub = new_media_stub()
         media_stub.ask_and_create()
     elif user_input == "s":
         media_stub.change_output_folder()
